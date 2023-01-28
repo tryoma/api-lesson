@@ -9,15 +9,15 @@ import {
   ParseIntPipe,
   Patch,
   Post,
-  Req,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Task } from '@prisma/client';
 import { Request } from 'express';
+import { TodoService } from './todo.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { TodoService } from './todo.service';
+import { Task } from '@prisma/client';
 
 @UseGuards(AuthGuard('jwt'))
 @Controller('todo')

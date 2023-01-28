@@ -19,7 +19,7 @@ export class AuthController {
 
   @Get('/csrf')
   getCsrfToken(@Req() req: Request): Csrf {
-    return { CsrfToken: req.csrfToken() };
+    return { csrfToken: req.csrfToken() };
   }
 
   @Post('signup')
@@ -47,7 +47,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('/logout')
-  logout(@Body() dto: AuthDto, @Res({ passthrough: true }) res: Response): Msg {
+  logout(@Req() req: Request, @Res({ passthrough: true }) res: Response): Msg {
     res.cookie('access_token', '', {
       httpOnly: true,
       secure: true,

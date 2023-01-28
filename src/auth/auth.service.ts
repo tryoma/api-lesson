@@ -3,7 +3,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { AuthDto } from './dto/auth.dto';
 import { Msg, Jwt } from './interfaces/auth.interface';
 
@@ -14,7 +14,6 @@ export class AuthService {
     private readonly jwt: JwtService,
     private readonly config: ConfigService,
   ) {}
-
   async signUp(dto: AuthDto): Promise<Msg> {
     const hashed = await bcrypt.hash(dto.password, 12);
     try {
@@ -36,7 +35,6 @@ export class AuthService {
       throw error;
     }
   }
-
   async login(dto: AuthDto): Promise<Jwt> {
     const user = await this.prisma.user.findUnique({
       where: {
